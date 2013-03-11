@@ -1,0 +1,15 @@
+---
+title: 'Document 1'
+---
+
+<img src="<%= @getThumbnail("image1.jpg") %>" alt="Thumb test 1">
+<img src="<%= @getThumbnail("image1.jpg", { w: 150, h: 300 }) %>" alt="Thumb test 2">
+<img src="<%= @getThumbnail("image1.jpg", "zoomcrop") %>" alt="Thumb test 3">
+<img src="<%= @getThumbnail("image1.jpg", "zoomcrop", "small-square") %>" alt="Thumb test 4">
+<img src="<%= @getThumbnail("image1.jpg", "medium-wide", "zoomcrop") %>" alt="Thumb test 5">
+<img src="<%= @getThumbnail("image1.jpg", "medium-wide", { q: 99 }) %>" alt="Thumb test 6">
+<img src="<%= @getThumbnail("image1.jpg", "small-wide", "high-quality") %>" alt="Thumb test 7">
+<img src="<%= @getThumbnail("image1.jpg", "large-square", "sepia") %>" alt="Thumb test 8">
+<img src="<%= @getThumbnail("image1.jpg", "zoomcrop", "sepia", "rotateleft") %>" alt="Thumb test 9">
+<img src="<%= @getThumbnail("image1.jpg", { w: 100, h: 100 }, "blog") %>" alt="Thumb test 10">
+<img src="<%= @getThumbnail("image1.jpg", "undefined-parameter") %>" alt="Thumb test 11">

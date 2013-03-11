@@ -1,6 +1,6 @@
 {
     "name": "docpad-plugin-thumbnails",
-    "version": "0.1.0",
+    "version": "2.0.0",
     "description": "DocPad plugin to generate thumbnails from your associated image files",
     "homepage": "https://github.com/rantecki/docpad-plugin-thumbnails",
     "keywords": [
@@ -31,6 +31,6 @@
     },
     "main": "./out/thumbnails.plugin.js",
     "scripts": {
-		"test": "node ./out/thumbnails.test.js"
+		"test": "node ./test/thumbnails.test.js"
     }
 }

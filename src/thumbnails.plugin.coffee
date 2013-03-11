@@ -109,16 +109,12 @@ module.exports = (BasePlugin) ->
 					# work out our target chain and params
 					targets = []
 					params = config.presets['default']
-# 					console.log("parsing args")
 					for a in args
-# 						console.log("arg: ", a)
 						if typeof a is 'object'
 							# this is a params object
-# 							console.log("got an object")
 							params = me.merge params, a
 						else if typeof a is 'function'
 							# this is a function that should return a params object
-# 							console.log("got a function")
 							params = me.merge params, a()
 						else
 							# treat as a string
@@ -128,30 +124,30 @@ module.exports = (BasePlugin) ->
 							else if a of config.presets
 								params = me.merge params, config.presets[a]
 							else
-								docpad.log 'warn', "Thumbnail: unknown parameter '#{a}' for image '#{srcPath}'"
+								docpad.log 'warn', "thumbnails::getThumbnail: unknown parameter '#{a}' for image '#{srcPath}'"
 
 					if not targets.length
 						t = config.targets["default"]
 						if not (typeof t is 'function')
 							# this is a reference to a different target
 							if not (t of config.targets)
-								docpad.error("Thumbnail: target name '#{t}' does not exist")
+								docpad.error("thumbnails::getThumbnail: target name '#{t}' does not exist")
 								return ""
 							targets.push t
 						else
 							targets.push "default"
 
-# 					docpad.log 'info', "Thumbnail: got target chain: ", targets
-# 					docpad.log 'info', "Thumbnail: got params ", params
-
 					sep = pathUtil.sep
 					suffix = ".thumb_" + targets.join("_") + "_" + me.paramsToString(params)
 					thumbfilename = basename + suffix + "." + ext
 					dstPath = outDirPath + sep + thumbfilename
-					targetUrl = "/" + relOutDirPath + "/" + thumbfilename
+					targetUrl = "/"
+					if relOutDirPath?.length
+						targetUrl += relOutDirPath + "/"
+					targetUrl += thumbfilename
 
-# 					docpad.log 'info', "Thumbnail: got dstPath '#{dstPath}'"
-# 					docpad.log 'info', "Thumbnail: got targetUrl '#{targetUrl}'"
+					docpad.log 'debug', "thumbnails: got dstPath '#{dstPath}'"
+					docpad.log 'debug', "thumbnails: got targetUrl '#{targetUrl}'"
 
 					# first check it's not already in our queue
 					if not (dstPath of me.thumbnailsToGenerate)
@@ -165,7 +161,7 @@ module.exports = (BasePlugin) ->
 							generate = true
 
 						if generate
-							docpad.log 'info', require('util').format("getThumbnail: adding %s to queue", dstPath)
+							docpad.log 'info', "thumbnails::getThumbnail: adding #{dstPath} to queue"
 
 							# add to queue
 							me.thumbnailsToGenerate[dstPath] = {
@@ -186,22 +182,19 @@ module.exports = (BasePlugin) ->
 
 		writeAfter: (opts,next) ->
 
-# 			console.log("Thumbnails: writeAfter")
-# 			console.log(@thumbnailsToGenerate)
-
 			me = @
 			config = @config
 			failures = 0
 
 			unless @thumbnailsToGenerateLength
-				docpad.log 'info', 'Thumbnails: nothing to generate'
+				docpad.log 'info', 'thumbnails: nothing to generate'
 				return next()
 
-			docpad.log 'info', "Thumbnails is generating #{@thumbnailsToGenerateLength} thumbnails..."
+			docpad.log 'info', "thumbnails is generating #{@thumbnailsToGenerateLength} thumbnails..."
 
 			tasks = new balUtil.Group (err) =>
 				docpad.log (if failures then 'warn' else 'info'),
-					'Thumbnail generation complete',
+					'thumbnail generation complete',
 					(if failures then "with #{failures} failures" else '')
 
 				return next()
@@ -214,7 +207,7 @@ module.exports = (BasePlugin) ->
 				targets = item.targets
 				params = item.params
 
-				docpad.log 'info', require('util').format("getThumbnail: generating %s", dstPath)
+				docpad.log 'info', require('util').format("thumbnails::getThumbnail: generating %s", dstPath)
 
 				tasks.push (complete) ->
 					img = gm(srcPath)
@@ -225,11 +218,11 @@ module.exports = (BasePlugin) ->
 					img.write(dstPath, (err) ->
 						# TODO: return error placeholder image if something went wrong?
 						if err
-							docpad.log 'warn', "Thumbnails failed to generate: #{dstPath}"
+							docpad.log 'warn', "thumbnails failed to generate: #{dstPath}"
 							docpad.error(err)
 							++failures
 						else
-							docpad.log 'info', "getThumbnail: finished generating "+dstPath
+							docpad.log 'info', "thumbnails::getThumbnail: finished generating "+dstPath
 
 						return complete()
 					)
@@ -240,6 +233,6 @@ module.exports = (BasePlugin) ->
 			@
 
 		generateAfter: ->
-			docpad.log 'info', 'Thumbnails: generateAfter'
+			docpad.log 'info', 'thumbnails: generateAfter'
 			@thumbnailsToGenerate = {}
 			@thumbnailsToGenerateLength = 0
