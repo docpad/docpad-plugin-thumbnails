@@ -19,12 +19,18 @@
         "url": "http://github.com/rantecki/docpad-plugin-thumbnails.git"
     },
     "engines" : {
-        "node": ">=0.6.0",
-        "docpad": "6.x"
+        "node": ">=0.4",
+        "docpad": ">=6.1 <7"
     },
     "dependencies": {
 		"bal-util": "~1.16.10",
 		"gm": "~1.8.1"
     },
-    "main": "./thumbnails.plugin.coffee"
+    "devDependencies": {
+		"coffee-script": "~1.4.0"
+    },
+    "main": "./out/thumbnails.plugin.js",
+    "scripts": {
+		"test": "node ./out/thumbnails.test.js"
+    }
 }
