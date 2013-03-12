@@ -144,6 +144,10 @@ plugins:
 				return img.rotate('black', -90)
 ```
 
+*img* is a reference to a gm image object.  The target function must also return a gm image object.
+
+The *args* argument is just an object containing the w, h, q parameters passed to `@getThumbnail()`
+
 You can use any GraphicsMagick/ImageMagick operation supported by the gm module.  You can find the details of those in the [gm docs](http://aheckmann.github.com/gm/docs.html).
 
 To run one of our new targets, we can do the following:
@@ -164,6 +168,22 @@ For example, you could do the following to get a small zoom-cropped, sepia'd and
 
 ```
 <img src="<%= @getThumbnail("images/image1.jpg", 'small', 'zoomcrop', 'sepia', 'rotateleft' %>"  alt="my image">
+```
+
+Of course if this was a common occurence on your site, you would be much better off building a target to do it all in one go, like so:
+
+```
+plugins:
+	thumbnails:
+		targets:
+			'doitall': (img, args) ->
+				return img
+					.quality(args.q)
+					.gravity('Center')
+					.resize(args.w, args.h, '^')
+					.crop(args.w, args.h)
+					.sepia()
+					.rotate('black', -90)
 ```
 
 ## License
