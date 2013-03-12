@@ -1,36 +1,37 @@
 {
-    "name": "docpad-plugin-thumbnails",
-    "version": "2.0.0",
-    "description": "DocPad plugin to generate thumbnails from your associated image files",
-    "homepage": "https://github.com/rantecki/docpad-plugin-thumbnails",
-    "keywords": [
-        "docpad",
-        "docpad-plugin",
-        "image",
-        "resize",
-        "thumbnail"
-    ],
-    "author": "Richard Antecki <richard@antecki.id.au> (richard.antecki.id.au)",
-    "bugs": {
-        "url": "https://github.com/rantecki/docpad-plugin-thumbnails/issues"
-    },
-    "repository" : {
-        "type": "git",
-        "url": "http://github.com/rantecki/docpad-plugin-thumbnails.git"
-    },
-    "engines" : {
-        "node": ">=0.4",
-        "docpad": ">=6.1 <7"
-    },
-    "dependencies": {
+	"name": "docpad-plugin-thumbnails",
+	"version": "2.0.0",
+	"description": "DocPad plugin to generate thumbnails from your associated image files",
+	"homepage": "https://github.com/rantecki/docpad-plugin-thumbnails",
+	"keywords": [
+		"docpad",
+		"docpad-plugin",
+		"image",
+		"resize",
+		"thumbnail"
+	],
+	"author": "Richard Antecki <richard@antecki.id.au> (richard.antecki.id.au)",
+	"bugs": {
+		"url": "https://github.com/rantecki/docpad-plugin-thumbnails/issues"
+	},
+	"repository" : {
+		"type": "git",
+		"url": "http://github.com/rantecki/docpad-plugin-thumbnails.git"
+	},
+	"engines" : {
+		"node": ">=0.4",
+		"docpad": ">=6.1 <7"
+	},
+	"dependencies": {
 		"bal-util": "~1.16.10",
 		"gm": "~1.8.1"
-    },
-    "devDependencies": {
+	},
+	"devDependencies": {
 		"coffee-script": "~1.4.0"
-    },
-    "main": "./out/thumbnails.plugin.js",
-    "scripts": {
-		"test": "node ./test/thumbnails.test.js"
-    }
+	},
+	"main": "./out/thumbnails.plugin.js",
+	"scripts": {
+		"test": "node ./test/thumbnails.test.js",
+		"prepublish": "cake compile"
+	}
 }
