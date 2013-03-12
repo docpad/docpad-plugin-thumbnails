@@ -39,9 +39,10 @@ On site generation, the file `out/images/image1.thumb_default_w100h100q85.jpg` w
 The Thumbnails plugin works well with the [AssociatedFiles](http://docpad.org/plugin/associatedfiles) plugin.  The example below (this time in *coffeekup*) will display 100x100 thumbnails of all images associated with the document using the AssociatedFiles plugin, with a link to the full-size image:
 
 ```
-files = @getDocument().getAssociatedFiles().findAll({extension: $in: ['jpg', 'JPG', 'png', 'PNG']}).toJSON()
-for file in files
-	a href: file.url, -> img src: @getThumbnail(file.url, {w: 100, h: 100}), alt: file.title or file.name
+image_exts = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG']
+images = @getDocument().getAssociatedFiles().findAll({extension: $in: image_exts}).toJSON()
+for image in images
+	a href: image.url, -> img src: @getThumbnail(image.url, w: 100, h: 100), alt: image.name
 ```
 
 ## Configuration
@@ -143,6 +144,10 @@ plugins:
 				return img.rotate('black', -90)
 ```
 
+*img* is a reference to a gm image object.  The target function must also return a gm image object.
+
+The *args* argument is just an object containing the w, h, q parameters passed to `@getThumbnail()`
+
 You can use any GraphicsMagick/ImageMagick operation supported by the gm module.  You can find the details of those in the [gm docs](http://aheckmann.github.com/gm/docs.html).
 
 To run one of our new targets, we can do the following:
@@ -157,12 +162,39 @@ Note however that in contrast to the presets, the default target is only run if 
 
 ### Running multiple targets
 
-You can pass in more than one target to `@getThumbnail' and they will be executed in order.
+You can pass in more than one target to `@getThumbnail()` and they will be executed in order.
 
 For example, you could do the following to get a small zoom-cropped, sepia'd and rotated image:
 
 ```
 <img src="<%= @getThumbnail("images/image1.jpg", 'small', 'zoomcrop', 'sepia', 'rotateleft' %>"  alt="my image">
+```
+
+Of course if this was a common occurence on your site, you would be much better off building a target to do it all in one go, like so:
+
+```
+plugins:
+	thumbnails:
+		targets:
+			'doitall': (img, args) ->
+				return img
+					.quality(args.q)
+					.gravity('Center')
+					.resize(args.w, args.h, '^')
+					.crop(args.w, args.h)
+					.sepia()
+					.rotate('black', -90)
+```
+
+### Overriding the default target
+
+You can assign a target name to `default` in the plugin configuration to make that target the new default action.  For example, to make `zoomcrop` the new default:
+
+```
+plugins:
+	thumbnails:
+		targets:
+			'default': 'zoomcrop'
 ```
 
 ## License
