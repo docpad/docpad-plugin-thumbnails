@@ -4,6 +4,5 @@
 	"private": true,
 	"dependencies": {
 		"docpad-plugin-eco": "latest",
-		"docpad-plugin-coffeekup": "latest"
 	}
 }
