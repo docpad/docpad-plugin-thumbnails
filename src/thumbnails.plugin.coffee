@@ -90,7 +90,7 @@ module.exports = (BasePlugin) ->
 
 			templateData.getThumbnail = (src, args...) ->
 				# return a thumbnail url, generating the image if necessary
-# 				docpad.log 'info', "getThumbnail: src=#{src}"
+				docpad.log 'debug', "getThumbnail: src=#{src}"
 				f = @getFileAtPath(src)
 				if f
 					srcPath = f.attributes.fullPath
@@ -187,10 +187,10 @@ module.exports = (BasePlugin) ->
 			failures = 0
 
 			unless @thumbnailsToGenerateLength
-				docpad.log 'info', 'thumbnails: nothing to generate'
+				docpad.log 'debug', 'thumbnails: nothing to generate'
 				return next()
 
-			docpad.log 'info', "thumbnails is generating #{@thumbnailsToGenerateLength} thumbnails..."
+			docpad.log 'debug', "thumbnails is generating #{@thumbnailsToGenerateLength} thumbnails..."
 
 			tasks = new balUtil.Group (err) =>
 				docpad.log (if failures then 'warn' else 'info'),
@@ -207,7 +207,7 @@ module.exports = (BasePlugin) ->
 				targets = item.targets
 				params = item.params
 
-				docpad.log 'info', require('util').format("thumbnails::getThumbnail: generating %s", dstPath)
+				docpad.log 'debug', "thumbnails::getThumbnail: generating #{dstPath}"
 
 				tasks.push (complete) ->
 					img = gm(srcPath)
@@ -222,7 +222,7 @@ module.exports = (BasePlugin) ->
 							docpad.error(err)
 							++failures
 						else
-							docpad.log 'info', "thumbnails::getThumbnail: finished generating "+dstPath
+							docpad.log 'debug', "thumbnails::getThumbnail: finished generating "+dstPath
 
 						return complete()
 					)
@@ -233,6 +233,6 @@ module.exports = (BasePlugin) ->
 			@
 
 		generateAfter: ->
-			docpad.log 'info', 'thumbnails: generateAfter'
+			docpad.log 'debug', 'thumbnails: generateAfter'
 			@thumbnailsToGenerate = {}
 			@thumbnailsToGenerateLength = 0
