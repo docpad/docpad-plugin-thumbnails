@@ -39,9 +39,9 @@ On site generation, the file `out/images/image1.thumb_default_w100h100q85.jpg` w
 The Thumbnails plugin works well with the [AssociatedFiles](http://docpad.org/plugin/associatedfiles) plugin.  The example below (this time in *coffeekup*) will display 100x100 thumbnails of all images associated with the document using the AssociatedFiles plugin, with a link to the full-size image:
 
 ```
-files = @getDocument().getAssociatedFiles().findAll({extension: $in: ['jpg', 'JPG', 'png', 'PNG']}).toJSON()
-for file in files
-	a href: file.url, -> img src: @getThumbnail(file.url, {w: 100, h: 100}), alt: file.title or file.name
+images = @getDocument().getAssociatedFiles().findAll({extension: $in: ['jpg', 'JPG', 'png', 'PNG']}).toJSON()
+for image in images
+	a href: image.url, -> img src: @getThumbnail(image.url, {w: 100, h: 100}), alt: image.name
 ```
 
 ## Configuration
