@@ -162,7 +162,7 @@ Note however that in contrast to the presets, the default target is only run if 
 
 ### Running multiple targets
 
-You can pass in more than one target to `@getThumbnail' and they will be executed in order.
+You can pass in more than one target to `@getThumbnail()` and they will be executed in order.
 
 For example, you could do the following to get a small zoom-cropped, sepia'd and rotated image:
 
@@ -184,6 +184,17 @@ plugins:
 					.crop(args.w, args.h)
 					.sepia()
 					.rotate('black', -90)
+```
+
+### Overriding the default target
+
+You can assign a target name to `default` in the plugin configuration to make that target the new default action.  For example, to make `zoomcrop` the new default:
+
+```
+plugins:
+	thumbnails:
+		targets:
+			'default': 'zoomcrop'
 ```
 
 ## License
