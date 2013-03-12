@@ -42,7 +42,7 @@ The Thumbnails plugin works well with the [AssociatedFiles](http://docpad.org/pl
 image_exts = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG']
 images = @getDocument().getAssociatedFiles().findAll({extension: $in: image_exts}).toJSON()
 for image in images
-	a href: image.url, -> img src: @getThumbnail(image.url, {w: 100, h: 100}), alt: image.name
+	a href: image.url, -> img src: @getThumbnail(image.url, w: 100, h: 100), alt: image.name
 ```
 
 ## Configuration
