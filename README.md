@@ -10,6 +10,16 @@ Install either [GraphicsMagick](http://www.graphicsmagick.org/) or [ImageMagick]
 npm install --save docpad-plugin-thumbnails
 ```
 
+### ImageMagick
+
+To specify the use of ImageMagick, rather than GraphicsMagick, you need to add the following configuration setting in your docpad configuration:
+
+```
+plugins:
+	thumbnails:
+		imageMagick: true
+```
+
 ## Usage
 
 ### Basic Usage
