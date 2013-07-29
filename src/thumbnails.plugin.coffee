@@ -63,6 +63,8 @@ module.exports = (BasePlugin) ->
 						.resize(args.w, args.h, '^')
 						.crop(args.w, args.h)
 
+			imageMagick: false
+
 		thumbnailsToGenerate: null  # Object
 		thumbnailsToGenerateLength: 0
 
@@ -210,7 +212,12 @@ module.exports = (BasePlugin) ->
 				docpad.log 'debug', "thumbnails::getThumbnail: generating #{dstPath}"
 
 				tasks.push (complete) ->
-					img = gm(srcPath)
+					if config.imageMagick
+						im = gm.subClass({ imageMagick: true })
+						img = im(srcPath)
+					else
+						img = gm(srcPath)
+
 					# execute the target chain
 					for t in targets
 						target_handler = config.targets[t]
