@@ -4,8 +4,20 @@ Adds support for thumbnail generation to [DocPad](https://docpad.org) using the 
 
 ## Install
 
+Install either [GraphicsMagick](http://www.graphicsmagick.org/) or [ImageMagick](http://www.imagemagick.org/), and then:
+
 ```
 npm install --save docpad-plugin-thumbnails
+```
+
+### ImageMagick
+
+To specify the use of ImageMagick, rather than GraphicsMagick, you need to add the following configuration setting in your docpad configuration:
+
+```
+plugins:
+	thumbnails:
+		imageMagick: true
 ```
 
 ## Usage
