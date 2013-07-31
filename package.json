@@ -1,6 +1,6 @@
 {
 	"name": "docpad-plugin-thumbnails",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"description": "DocPad plugin to generate thumbnails from your associated image files",
 	"homepage": "https://github.com/rantecki/docpad-plugin-thumbnails",
 	"keywords": [
@@ -11,6 +11,13 @@
 		"thumbnail"
 	],
 	"author": "Richard Antecki <richard@antecki.id.au> (richard.antecki.id.au)",
+	"maintainers": [
+		"Richard Antecki <richard@antecki.id.au> (richard.antecki.id.au)"
+	],
+	"contributors": [
+		"Richard Antecki <richard@antecki.id.au> (richard.antecki.id.au)",
+		"Jon Baker (https://github.com/miletbaker)"
+	],
 	"bugs": {
 		"url": "https://github.com/rantecki/docpad-plugin-thumbnails/issues"
 	},
