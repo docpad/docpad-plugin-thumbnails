@@ -64,6 +64,7 @@ module.exports = (BasePlugin) ->
 						.crop(args.w, args.h)
 
 			imageMagick: false
+			extensions: ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG']
 
 		thumbnailsToGenerate: null  # Object
 		thumbnailsToGenerateLength: 0
@@ -103,7 +104,7 @@ module.exports = (BasePlugin) ->
 					ext = f.attributes.extension
 
 					# first check that file extension is a valid image format
-					if ext not in ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG']
+					if ext not in config.extensions
 						msg = "Thumbnail: source file extension '#{ext}' not recognised"
 						docpad.error(msg)
 						return ""

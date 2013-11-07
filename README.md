@@ -209,6 +209,14 @@ plugins:
 			'default': 'zoomcrop'
 ```
 
+### Adding different file formats
+
+By default the plugin supports jpeg and png files.  If you wish to use other formats that are supported by ImageMagick/GraphicsMagick you can override the `extensions` option.  This limits the file extensions that are allowed to be passed through the plugin.
+
+```
+extensions: ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 'gif', 'GIF']
+```
+
 ## History
 You can discover the history inside the `History.md` file
 
