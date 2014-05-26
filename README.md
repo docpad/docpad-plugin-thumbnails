@@ -227,3 +227,4 @@ Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissi
 ## Contributors
 - [Richard Antecki](https://github.com/rantecki)
 - [Jon Baker](https://github.com/miletbaker)
+- [Ángel González](https://github.com/Aglezabad)

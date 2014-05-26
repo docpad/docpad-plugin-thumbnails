@@ -1,6 +1,6 @@
 {
 	"name": "docpad-plugin-thumbnails",
-	"version": "2.1.1",
+	"version": "2.1.2",
 	"description": "DocPad plugin to generate thumbnails from your associated image files",
 	"homepage": "https://github.com/rantecki/docpad-plugin-thumbnails",
 	"keywords": [
@@ -27,7 +27,7 @@
 	},
 	"engines" : {
 		"node": ">=0.4",
-		"docpad": ">=6.1 <7"
+		"docpad": ">=6.66 <7"
 	},
 	"dependencies": {
 		"bal-util": "~1.16.10",
