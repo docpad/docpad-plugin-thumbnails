@@ -88,6 +88,8 @@ module.exports = (BasePlugin) ->
 
 		extendTemplateData: ({templateData}) ->
 
+			#Prepare
+			docpad = @docpad
 			me = @
 			config = @config
 
@@ -185,6 +187,8 @@ module.exports = (BasePlugin) ->
 
 		writeAfter: (opts,next) ->
 
+			#Prepare
+			docpad = @docpad
 			me = @
 			config = @config
 			failures = 0
@@ -241,6 +245,10 @@ module.exports = (BasePlugin) ->
 			@
 
 		generateAfter: ->
+
+			#Prepare
+			docpad = @docpad
+			
 			docpad.log 'debug', 'thumbnails: generateAfter'
 			@thumbnailsToGenerate = {}
 			@thumbnailsToGenerateLength = 0
