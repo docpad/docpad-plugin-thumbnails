@@ -239,7 +239,7 @@ module.exports = (BasePlugin) ->
 						return complete()
 					)
 
-			tasks.async()
+			tasks.sync()
 
 			# Chain
 			@
