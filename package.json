@@ -1,44 +1,134 @@
 {
-	"name": "docpad-plugin-thumbnails",
-	"version": "2.1.2",
-	"description": "DocPad plugin to generate thumbnails from your associated image files",
-	"homepage": "https://github.com/rantecki/docpad-plugin-thumbnails",
-	"keywords": [
-		"docpad",
-		"docpad-plugin",
-		"image",
-		"resize",
-		"thumbnail"
-	],
-	"author": "Richard Antecki <richard@antecki.id.au> (richard.antecki.id.au)",
-	"maintainers": [
-		"Richard Antecki <richard@antecki.id.au> (richard.antecki.id.au)"
-	],
-	"contributors": [
-		"Richard Antecki <richard@antecki.id.au> (richard.antecki.id.au)",
-		"Jon Baker (https://github.com/miletbaker)"
-	],
-	"bugs": {
-		"url": "https://github.com/rantecki/docpad-plugin-thumbnails/issues"
-	},
-	"repository" : {
-		"type": "git",
-		"url": "http://github.com/rantecki/docpad-plugin-thumbnails.git"
-	},
-	"engines" : {
-		"node": ">=0.4",
-		"docpad": ">=6.66 <7"
-	},
-	"dependencies": {
-		"bal-util": "~1.16.10",
-		"gm": "~1.8.1"
-	},
-	"devDependencies": {
-		"coffee-script": "~1.4.0"
-	},
-	"main": "./out/thumbnails.plugin.js",
-	"scripts": {
-		"test": "node ./test/thumbnails.test.js",
-		"prepublish": "cake compile"
-	}
+  "name": "docpad-plugin-thumbnails",
+  "version": "2.2.0",
+  "description": "DocPad plugin to generate thumbnails from your associated image files",
+  "homepage": "https://github.com/docpad/docpad-plugin-thumbnails",
+  "license": "MIT",
+  "keywords": [
+    "coffeescript",
+    "docpad",
+    "docpad-plugin",
+    "image",
+    "node",
+    "resize",
+    "thumbnail"
+  ],
+  "badges": {
+    "list": [
+      "travisci",
+      "npmversion",
+      "npmdownloads",
+      "daviddm",
+      "daviddmdev",
+      "---",
+      "githubsponsors",
+      "patreon",
+      "flattr",
+      "liberapay",
+      "buymeacoffee",
+      "opencollective",
+      "crypto",
+      "paypal",
+      "wishlist"
+    ],
+    "config": {
+      "githubSponsorsUsername": "balupton",
+      "buymeacoffeeUsername": "balupton",
+      "cryptoURL": "https://bevry.me/crypto",
+      "flattrUsername": "balupton",
+      "liberapayUsername": "bevry",
+      "opencollectiveUsername": "bevry",
+      "patreonUsername": "bevry",
+      "paypalURL": "https://bevry.me/paypal",
+      "wishlistURL": "https://bevry.me/wishlist",
+      "githubUsername": "docpad",
+      "githubRepository": "docpad-plugin-thumbnails",
+      "githubSlug": "docpad/docpad-plugin-thumbnails",
+      "npmPackageName": "docpad-plugin-thumbnails"
+    }
+  },
+  "funding": "https://bevry.me/fund",
+  "author": "Richard Antecki <richard@antecki.id.au> (richard.antecki.id.au)",
+  "maintainers": [
+    "Richard Antecki <richard@antecki.id.au> (richard.antecki.id.au)"
+  ],
+  "contributors": [
+    "Jon Baker (https://github.com/miletbaker)",
+    "Richard Antecki <richard@antecki.id.au> (richard.antecki.id.au)"
+  ],
+  "bugs": {
+    "url": "https://github.com/docpad/docpad-plugin-thumbnails/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/docpad/docpad-plugin-thumbnails.git"
+  },
+  "engines": {
+    "node": ">=10",
+    "docpad": ">=6.66 <7"
+  },
+  "editions": [
+    {
+      "description": "CoffeeScript source code with Require for modules",
+      "directory": "source",
+      "entry": "index.coffee",
+      "tags": [
+        "coffeescript",
+        "require"
+      ],
+      "engines": false
+    },
+    {
+      "description": "CoffeeScript compiled for Node.js with Require for modules",
+      "directory": "edition-esnext",
+      "entry": "index.js",
+      "tags": [
+        "javascript",
+        "esnext",
+        "require"
+      ],
+      "engines": {
+        "node": true
+      }
+    }
+  ],
+  "type": "commonjs",
+  "main": "edition-esnext/index.js",
+  "dependencies": {
+    "bal-util": "~2.8.0",
+    "docpad-baseplugin": "^1.4.0",
+    "gm": "~1.23.1"
+  },
+  "devDependencies": {
+    "@bevry/update-contributors": "^1.15.0",
+    "coffeelint": "^2.1.0",
+    "coffeescript": "^2.5.1",
+    "docpad": "^6.83.1",
+    "docpad-plugintester": "^1.6.2",
+    "projectz": "^2.13.0",
+    "valid-directory": "^2.8.0"
+  },
+  "scripts": {
+    "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
+    "our:compile": "npm run our:compile:edition-esnext",
+    "our:compile:edition-esnext": "coffee -bco ./edition-esnext ./source && echo '{\"type\": \"commonjs\"}' > edition-esnext/package.json",
+    "our:deploy": "echo no need for this project",
+    "our:meta": "npm run our:meta:contributors && npm run our:meta:projectz",
+    "our:meta:contributors": "update-contributors",
+    "our:meta:projectz": "projectz compile",
+    "our:release": "npm run our:release:prepare && npm run our:release:check-changelog && npm run our:release:check-dirty && npm run our:release:tag && npm run our:release:push",
+    "our:release:check-changelog": "cat ./HISTORY.md | grep v$npm_package_version || (echo add a changelog entry for v$npm_package_version && exit -1)",
+    "our:release:check-dirty": "git diff --exit-code",
+    "our:release:prepare": "npm run our:clean && npm run our:compile && npm run our:test && npm run our:meta",
+    "our:release:push": "git push origin master && git push origin --tags",
+    "our:release:tag": "export MESSAGE=$(cat ./HISTORY.md | sed -n \"/## v$npm_package_version/,/##/p\" | sed 's/## //' | awk 'NR>1{print buf}{buf = $0}') && test \"$MESSAGE\" || (echo 'proper changelog entry not found' && exit -1) && git tag v$npm_package_version -am \"$MESSAGE\"",
+    "our:setup": "npm run our:setup:install",
+    "our:setup:install": "npm install",
+    "our:test": "npm run our:verify && npm test",
+    "our:verify": "npm run our:verify:coffeelint && npm run our:verify:directory",
+    "our:verify:coffeelint": "coffeelint ./source",
+    "our:verify:directory": "valid-directory",
+    "test": "docpad-plugintester",
+    "prepublish": "cake compile"
+  }
 }

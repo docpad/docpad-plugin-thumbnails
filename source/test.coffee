@@ -21,12 +21,10 @@ module.exports = require('docpad-plugintester').test({}, {
 				}
 			},
 			targets: {
-				'sepia'(img, args) {
+				sepia: (img, args) ->
 					return img.sepia()
-				},
-				'rotateleft'(img, args) {
+				rotateleft: (img, args) ->
 					return img.rotate('black', -90)
-				}
 			}
 		}
 	}

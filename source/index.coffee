@@ -69,10 +69,6 @@ module.exports = (BasePlugin) ->
 		thumbnailsToGenerate: null  # Object
 		thumbnailsToGenerateLength: 0
 
-		constructor: ->
-			super
-			@thumbnailsToGenerate = {}
-
 		merge: (obj1, obj2) ->
 			return balUtil.extend (balUtil.extend {}, obj1 ), obj2
 
@@ -87,6 +83,7 @@ module.exports = (BasePlugin) ->
 			return str
 
 		extendTemplateData: ({templateData}) ->
+			thumbnailsToGenerate = thumbnailsToGenerate || {}
 
 			#Prepare
 			docpad = @docpad
@@ -106,7 +103,7 @@ module.exports = (BasePlugin) ->
 					ext = f.attributes.extension
 
 					# first check that file extension is a valid image format
-					if ext not in config.extensions
+					if config.extensions.includes(ext) is false
 						msg = "Thumbnail: source file extension '#{ext}' not recognised"
 						docpad.error(msg)
 						return ""
@@ -186,6 +183,7 @@ module.exports = (BasePlugin) ->
 			@
 
 		writeAfter: (opts,next) ->
+			thumbnailsToGenerate = thumbnailsToGenerate || {}
 
 			#Prepare
 			docpad = @docpad
@@ -245,10 +243,11 @@ module.exports = (BasePlugin) ->
 			@
 
 		generateAfter: ->
+			thumbnailsToGenerate = thumbnailsToGenerate || {}
 
 			#Prepare
 			docpad = @docpad
-			
+
 			docpad.log 'debug', 'thumbnails: generateAfter'
 			@thumbnailsToGenerate = {}
 			@thumbnailsToGenerateLength = 0
