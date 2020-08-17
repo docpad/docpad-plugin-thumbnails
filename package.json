@@ -106,7 +106,7 @@
     "docpad": "^6.83.1",
     "docpad-plugintester": "^1.6.2",
     "projectz": "^2.13.0",
-    "valid-directory": "^2.8.0"
+    "valid-directory": "^3.0.0"
   },
   "scripts": {
     "our:clean": "rm -Rf ./docs ./edition* ./es2015 ./es5 ./out ./.next",
