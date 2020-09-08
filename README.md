@@ -33,13 +33,7 @@ DocPad plugin to generate thumbnails from your associated image files
 <!-- /DESCRIPTION -->
 
 
-<!-- INSTALL/ -->
 
-<h2>Install</h2>
-
-Install this DocPad plugin by entering <code>docpad install thumbnails</code> into your terminal.
-
-<!-- /INSTALL -->
 
 
 Install either [GraphicsMagick](http://www.graphicsmagick.org/) or [ImageMagick](http://www.imagemagick.org/), and then:
@@ -250,6 +244,26 @@ By default the plugin supports jpeg and png files. If you wish to use other form
 ```
 extensions: ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 'gif', 'GIF']
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- INSTALL/ -->
+
+<h2>Install</h2>
+
+Install this DocPad plugin by entering <code>docpad install thumbnails</code> into your terminal.
+
+<!-- /INSTALL -->
 
 <!-- HISTORY/ -->
 
