@@ -128,7 +128,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^2.1.1",
-    "projectz": "^2.16.0",
+    "projectz": "^4.2.0",
     "valid-directory": "^3.4.0"
   },
   "peerDependencies": {
